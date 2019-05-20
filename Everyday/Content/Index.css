@@ -1,0 +1,43 @@
+body{
+    
+    
+}
+
+.searchbox
+{
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: row ;
+    margin-top: 100px;
+}
+.searchbox input{
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    height: 40px;
+    border:none;
+    margin-right: -10px;
+}
+
+
+.bttn{
+    border:none;
+    background-color: #89cc96;
+    color: white;
+   
+    font-family: Roboto,sans-serif;
+    outline: 0 !important;
+
+    transition: background-color 0.2s linear;
+
+}
+
+
+
+.bttn:hover{
+    background-color: #70c4a5;
+}
+#salary{
+    outline: none;
+}

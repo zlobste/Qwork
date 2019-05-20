@@ -1,31 +1,375 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿
+@model IEnumerable<Everyday.Models.Vacancy>
+@{
+
+
+
+
+
+    ViewBag.Title = "Index";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<link href="/Content/Index.css" rel="stylesheet">
+
+<div class="searchbox">
+<form asp-controller="Home" asp-action="Index" method="delete">
+    <p>
+        <input type="text" name="SearchString" placeholder="Вакансия">
+        <input type="text" name="SearchCity" placeholder="Город">
+        <input class="bttn" type="submit" value=" Поиск" />
+    </p>
+    <p>
+        <select name="salary" id="salary">
+            <option value="no">Все</option>
+            <option value="yes">Указана зарплата</option>
+        </select>
+      
+    </p>
+</form>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<br>
+<br>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.VacancyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th>
+            CompanyName
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.About)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            Email
+        </th>
+        <th></th>
+    </tr>
+
+    @*item.City.Equals(ViewBag.c)*@
+
+    @if (ViewBag.s.Equals("") && ViewBag.c.Equals(""))// нет ни того ни того
+    {
+    }
+    else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false)//есть город
+    {
+        if (ViewBag.salary.Equals("no"))
+        {
+            foreach (var item in Model)
+            {
+
+                if ((ViewBag.c.ToUpper()).IndexOf(item.City.ToUpper()) != -1 || (item.City.ToUpper()).IndexOf(ViewBag.c.ToUpper()) != -1)
+                {
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.VacancyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.About)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company.CompanyEmail)
+        </td>
+
+
+        <td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    using(Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                    {
+                    @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
+                    <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
+                    <input type="submit" value="Добавить вакансию" />
+                    }
+                }
+        </td>
+    </tr>
+
+
+
+
+                            }
+
+                            }
+
+                            }
+                            else if (ViewBag.salary.Equals("yes"))
+                            {
+
+
+
+                            foreach (var item in Model)
+                            {
+
+                            if (((ViewBag.c.ToUpper()).IndexOf(item.City.ToUpper()) != -1 || (item.City.ToUpper()).IndexOf(ViewBag.c.ToUpper()) != -1) && item.Salary != null)
+                            {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VacancyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Salary)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.About)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyEmail)
+                                </td>
+
+                                 <td>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        using(Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                                        {
+                                        @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
+                                        <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
+                                        <input type="submit" value="Добавить вакансию" />
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                            }
+
+                            }
+
+
+                            }
+
+                            }
+                            //.......................................................................................................................
+                            else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals(""))//есть  название
+                            {
+
+                            if (ViewBag.salary.Equals("no"))
+                            {
+                            foreach (var item in Model)
+                            {
+
+                            if (item.VacancyName.ToUpper().IndexOf(ViewBag.s.ToUpper()) != -1 || (ViewBag.s.ToUpper()).IndexOf(item.VacancyName.ToUpper()) != -1)
+                            {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VacancyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Salary)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.About)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyEmail)
+                                </td>
+
+
+
+
+                                <td>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                                        {
+                                            @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
+                                            <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
+                                            <input type="submit" value="Добавить вакансию" />
+                                        }
+                                    }
+                                </td>
+
+                            </tr>
+                            }
+
+                            }
+
+
+                            }
+                            else if (ViewBag.salary.Equals("yes"))
+                            {
+                            foreach (var item in Model)
+                            {
+
+                            if ((item.VacancyName.ToUpper().IndexOf(ViewBag.s.ToUpper()) != -1 || (ViewBag.s.ToUpper()).IndexOf(item.VacancyName.ToUpper()) != -1) && item.Salary != null)
+                            {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VacancyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Salary)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.About)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyEmail)
+                                </td>
+
+
+                                <td>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                                        {
+                                            @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
+                                            <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
+                                            <input type="submit" value="Добавить вакансию" />
+                                        }
+                                    }
+                                </td>
+
+                            </tr>
+                            }
+                            }
+                            }
+                            }
+                            else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("") == false)//есть  и название и город
+                            {
+
+                            if (ViewBag.salary.Equals("no"))
+                            {
+
+
+                            foreach (var item in Model)
+                            {
+
+                            if (item.VacancyName.ToUpper().IndexOf(ViewBag.s.ToUpper()) != -1 && (item.City.ToUpper()).IndexOf(ViewBag.c.ToUpper()) != -1 || ViewBag.s.ToUpper().IndexOf(item.VacancyName.ToUpper()) != -1 && (ViewBag.c.ToUpper()).IndexOf(item.City.ToUpper()) != -1 || item.VacancyName.ToUpper().IndexOf(ViewBag.s.ToUpper()) != -1 && (ViewBag.c.ToUpper()).IndexOf(item.City.ToUpper()) != -1 || ViewBag.s.ToUpper().IndexOf(item.VacancyName.ToUpper()) != -1 && (item.City.ToUpper()).IndexOf(ViewBag.c.ToUpper()) != -1)
+                            {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VacancyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Salary)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.About)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyEmail)
+                                </td>
+
+                                 <td>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        using(Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                                        {
+                                        @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
+                                        <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
+                                        <input type="submit" value="Добавить вакансию" />
+                                        }
+                                    }
+                                </td>
+
+                            </tr>
+                            }
+
+
+                            }
+
+                            }
+
+
+                            else if (ViewBag.salary.Equals("yes"))
+                            {
+
+
+
+                            foreach (var item in Model)
+                            {
+
+                            if (((item.VacancyName.ToUpper().IndexOf(ViewBag.s.ToUpper()) != -1 && (item.City.ToUpper()).IndexOf(ViewBag.c.ToUpper()) != -1) || (ViewBag.s.ToUpper().IndexOf(item.VacancyName.ToUpper()) != -1 && (ViewBag.c.ToUpper()).IndexOf(item.City.ToUpper()) != -1) || (item.VacancyName.ToUpper().IndexOf(ViewBag.s.ToUpper()) != -1 && (ViewBag.c.ToUpper()).IndexOf(item.City.ToUpper()) != -1) || (ViewBag.s.ToUpper().IndexOf(item.VacancyName.ToUpper()) != -1 && (item.City.ToUpper()).IndexOf(ViewBag.c.ToUpper()) != -1)) && item.Salary != null)
+                            {
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VacancyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Salary)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.About)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyEmail)
+                                </td>
+
+
+                                <td>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                                        {
+                                            @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
+                                            <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
+                                            <input type="submit" value="Добавить вакансию" />
+                                        }
+                                    }
+                                </td>
+
+                            </tr>
+                            }
+
+
+                            }
+
+                            }
+
+                            }
+
+
+
+
+                        </table>
