@@ -1,0 +1,45 @@
+.forflex{
+    display: flex;
+justify-content: center;
+}
+input[type="submit"]
+{
+    
+    background:none ;
+    color: #89cc96;
+    border: 1px solid #89cc96;
+    font-family: Roboto,sans-serif;
+    outline: 0 !important;
+    transition: background-color 0.2s linear;
+    height: 35px;
+
+    border-radius: 25px;
+}
+input[type="submit"]:hover {
+    background-color: #70c4a5;
+    color: white;
+}
+h2{
+
+    color:#547062;
+}
+
+
+
+.delbut
+{
+
+    background:none ;
+    color: #89cc96;
+    border: 1px solid #89cc96;
+    font-family: Roboto,sans-serif;
+    outline: 0 !important;
+    transition: background-color 0.2s linear;
+    height: 35px;
+
+    border-radius: 25px;
+}
+.delbut:hover {
+    background-color: #70c4a5;
+    color: white;
+}

@@ -1,0 +1,51 @@
+
+
+a{
+    color: #7cc9ad;
+    text-decoration: none;
+}
+a:visited {
+
+    color: #7cc9ad;
+
+}
+a:active {
+    color: #7cc9ad;
+}
+
+a:hover {
+
+    color: #577869;
+    border:none;
+
+}
+  .smen{
+      
+      
+     padding-top: 30px; 
+      
+      
+  }
+
+
+h2{
+
+    color:#547062;
+}
+a{
+    
+    color:#70c4a5;
+}
+
+.thgreen{
+
+
+    color:#577869;
+}
+
+table{border-color: #547062;}
+
+.bott{
+
+    margin-top: 30px;
+}

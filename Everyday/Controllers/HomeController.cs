@@ -16,16 +16,6 @@ namespace Everyday.Controllers
 
         ApplicationContext db = new ApplicationContext();
 
-
-
-        //---------------------------------------------------------------------------------
-        //Список(вывод) вакансий
-        public ActionResult MyVacancies()
-        {
-            db.Database.EnsureCreated();
-            var vacancies = db.vacancy.Include(v => v.Company);
-            return View(vacancies.ToList());
-        }
         //---------------------------------------------------------------------------------
         //Cоздание вакансии
         //Get метод
@@ -191,7 +181,7 @@ namespace Everyday.Controllers
             return View(vacancies.ToList());
         }
         //---------------------------------------------------------------------------------
-        //Удаление vacancy
+        //Удаление вакансий
         [Authorize]
         public ActionResult DeleteVacancy(int? id)
         {
@@ -204,18 +194,13 @@ namespace Everyday.Controllers
             return RedirectToAction("MyCompanies");
         }
         //---------------------------------------------------------------------------------
-
-
+        //Главная
         public ActionResult Index(string searchString, string searchCity, string salary)
         {
-
             User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
 
-           
             SelectList rezimes = new SelectList(db.resume.Where(f => f.UserId == us.UserId), "ResumeId", "UserEmail");
             ViewBag.rezimes = rezimes;
-
-
             ViewBag.sel = db.resume.Where(f => f.UserId == us.UserId);
 
             if (searchString == null)
@@ -234,37 +219,37 @@ namespace Everyday.Controllers
             var vacancies = db.vacancy.Include(v => v.Company);
             return View(vacancies.ToList());
         }
-
-
-
-        [HttpPost]
-        public string Index(FormCollection fc, string searchString)
-        {
-            return "From [HttpPost]Index: filter on " + searchString;
-        }
-
-
+        //---------------------------------------------------------------------------------
+        //Кабинет пользователя
         [Authorize]
         public ActionResult Cabinet()
         {
-
+            User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
+            ViewBag.usn = us.UserName;
             return View();
         }
-
-
-
-
-
+        //---------------------------------------------------------------------------------
+        //Создание резюме
         [HttpGet]
         [Authorize]
         public ActionResult CreateResume(int? id)
         {
+            User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
 
 
+            ViewBag.usage = GetAge(us.UserAge);
+            ViewBag.usname = us.UserName;
+            ViewBag.usemail = us.UserEmail;
+            ViewBag.usmobile = us.UserMobileNumber;
             ViewBag.id = id;
-
             return View();
             
+        }
+        public static int GetAge(DateTime birthDate)
+        {
+            var now = DateTime.Today;
+            return now.Year - birthDate.Year - 1 + 
+                   ((now.Month > birthDate.Month || now.Month == birthDate.Month && now.Day >= birthDate.Day) ? 1 : 0);
         }
         //..................................................................................
         //Post метод
@@ -274,50 +259,36 @@ namespace Everyday.Controllers
         {
             if(PhotoImage== null) { return CreateResume(id); }
 
-            if (ModelState.IsValid)
-            {
-                byte[] imageData = null;
+            
+                byte[] imageData;
                 using (var binaryReader = new BinaryReader(PhotoImage.InputStream))
                 {
-                    imageData = binaryReader.ReadBytes(PhotoImage.ContentLength);
+                   imageData = binaryReader.ReadBytes(PhotoImage.ContentLength);
                 }
                 resume.Photo = imageData;
-
-            }
-
-            //Добавляем вакансию в таблицу
+            
             resume.UserId = id;
             db.resume.Add(resume);
             db.SaveChanges();
             // перенаправляем на главную страницу
             return RedirectToAction("MyResumes");
         }
-
-
-       
-
-
-
+        //---------------------------------------------------------------------------------
+        //Вывод резюме пользователя
         [Authorize]
         public ActionResult MyResumes()
         {
             db.Database.EnsureCreated();
-
-
-
             User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
-
             string f = User.Identity.Name;
             ViewBag.el = f;
             ViewBag.id = us.UserId;
-
-
-            db.Database.EnsureCreated();
-            var resumes = db.resume.Include(v => v.User);
-            return View(resumes.ToList());
+            List<Resume> ff= new List<Resume>(db.resume.Where(f2 => f2.UserId == us.UserId));
+            ViewBag.res = ff;
+            return View(ff);
         }
-
-
+        //---------------------------------------------------------------------------------
+        //Удаление резюме
         [Authorize]
         public ActionResult DeleteResume(int? id)
         {
@@ -329,7 +300,8 @@ namespace Everyday.Controllers
             }
             return RedirectToAction("MyResumes");
         }
-
+        //---------------------------------------------------------------------------------
+        //Изменения в резюме
         [Authorize]
         [HttpGet]
         public ActionResult EditResume(int? id)
@@ -353,10 +325,6 @@ namespace Everyday.Controllers
         [HttpPost]
         public ActionResult EditResume(Resume rso, HttpPostedFileBase PhotoImage)
         {
-
-
-
-
             if (PhotoImage != null)
             {
                 if (ModelState.IsValid)
@@ -369,20 +337,12 @@ namespace Everyday.Controllers
                     }
                 }
             } 
-            
-
-          
-
             db.Entry(rso).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("MyResumes");
-
-
-            
+            return RedirectToAction("MyResumes");     
         }
-
-
-
+        //---------------------------------------------------------------------------------
+        //Заявки(резюме)на вакансию
         [Authorize]
         public ActionResult VacancyDetails(int? id)
         {
@@ -418,22 +378,12 @@ namespace Everyday.Controllers
                 ViewBag.v = vacancy;
                 ViewBag.er = id;
                 return View();
-
-
-
-
                
             }
             return RedirectToAction("MyCompanies");
         }
-
-
-
-
-
-       
-        //..................................................................................
-        //Post метод
+        //---------------------------------------------------------------------------------
+        //обавление резюме
         [Authorize]
         [HttpPost]
         public ActionResult AddResume(int? idres, int? idvac)
@@ -442,7 +392,7 @@ namespace Everyday.Controllers
 
             if (idres == null)
             {
-                return RedirectToAction("MyCompanies");
+                return RedirectToAction("MyResumes");
             }
             else
             {
@@ -463,13 +413,12 @@ namespace Everyday.Controllers
             }
         }
 
-
+        //---------------------------------------------------------------------------------
+        //удвление пезюме
         [Authorize]
         [HttpPost]
         public ActionResult DeleteThisResume(int? id , int? idvac)
         {
-
-
             Vacancy vacancy = db.vacancy.Find(idvac);
 
             string[] s = vacancy.Resume.Split(' ');
@@ -479,10 +428,8 @@ namespace Everyday.Controllers
             
             return RedirectToAction("MyCompanies");
         }
-
-
-
-
+        //---------------------------------------------------------------------------------
+        //удаление из массива по индексу
         public static void delByIndex(ref string[] data, int delIndex)
         {
             string[] newData = new string[data.Length - 1];
@@ -495,6 +442,17 @@ namespace Everyday.Controllers
                 newData[i] = data[i + 1];
             }
             data = newData;
+        }
+        //---------------------------------------------------------------------------------
+        //Показать информацию о компании
+        public ActionResult SeeCompany(int id)
+        {
+            Company companyo = db.company.Find(id);
+            ViewBag.co1 = companyo.CompanyName;
+            ViewBag.co2 = companyo.CompanyEmail;
+            ViewBag.co3 = companyo.About;
+            
+            return View();
         }
 
 

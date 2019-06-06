@@ -9,22 +9,30 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:   #69aa90; color: white; border: 1px solid white; font-weight: 500; font-size: 1.2em;  font-family: Roboto,sans-serif;">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style=" border: 1px solid white;" >
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Qwork", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Qwork", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" , style=" color: white;"})
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Гавная", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Мой кабинет", "Cabinet", "Home")</li>
-                    <li>@Html.ActionLink("Вход", "Login", "Account")</li>
-                    <li>@Html.ActionLink("Регистрация", "Register", "Account")</li>
+            <div class="navbar-collapse collapse " style=" color: white;">
+                <ul class="nav navbar-nav" >
+                    @* <li >@Html.ActionLink("Гавная", "Index", "Home",new { area = "" }, new { style=" color: white; "})</li> *@
+                     <li>@Html.ActionLink("Мой кабинет", "Cabinet", "Home",new { area = "" }, new { style=" color: white;"})</li> 
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>@Html.ActionLink("Выход", "Logoff", "Account",new { area = "" }, new { style=" color: white;"})</li>
+                   
+                }
+                else{
+                    <li>@Html.ActionLink("Вход", "Login", "Account",new { area = "" }, new { style=" color: white;"})</li>
+                    <li>@Html.ActionLink("Регистрация", "Register", "Account",new { area = "" }, new { style=" color: white;"})</li>
+                    
+                }
                 </ul>
             </div>
         </div>

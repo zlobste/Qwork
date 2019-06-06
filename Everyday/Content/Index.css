@@ -1,3 +1,5 @@
+
+
 body{
     
     
@@ -11,7 +13,16 @@ body{
     flex-direction: row ;
     margin-top: 100px;
 }
-.searchbox input{
+.searchbox input[type="text"]{
+    padding-left: 10px;
+    padding-right: 10px;
+    outline: none;
+    width: 300px;
+    height: 40px;
+    border:none;
+    margin-right: -10px;
+}
+.searchbox input[type="submit"]{
     padding-left: 10px;
     padding-right: 10px;
     outline: none;
@@ -21,23 +32,84 @@ body{
 }
 
 
-.bttn{
-    border:none;
-    background-color: #89cc96;
-    color: white;
-   
+.bot{
+    
+    background:none ;
+    color: #89cc96;
+    border: 1px solid #89cc96;
     font-family: Roboto,sans-serif;
     outline: 0 !important;
-
     transition: background-color 0.2s linear;
+    height: 35px;
 
+border-radius: 25px;
 }
-
-
-
-.bttn:hover{
+.bot:hover{
     background-color: #70c4a5;
+    color: white;
 }
+
+
+
+
+.bttn{
+    /*border-radius: 15px 100px 15px 100px;*/
+    margin-left: 10px;
+    border:none;
+    background-color: #70c4a5;
+    color: white;
+    font-family: Roboto,sans-serif;
+    outline: 0 !important;
+    transition: background-color 0.2s linear;
+}
+.bttn:hover{
+    background-color: #89cc96;
+}
+
+
+
+
+
+
+
+
 #salary{
     outline: none;
+}
+
+
+
+
+
+
+
+
+
+.styled-select select {
+    background: transparent;
+    width: 268px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    height: 34px;
+}
+
+select
+{
+    outline: none;
+}
+
+
+
+
+td form
+{
+    
+    margin-top: 30px;
+}
+
+td select
+{
+    margin-top: 5px;
+    margin-left: 15px;
 }
