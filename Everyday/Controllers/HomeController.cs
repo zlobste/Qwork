@@ -36,11 +36,16 @@ namespace Everyday.Controllers
         [HttpPost]
         public ActionResult Create(Vacancy vacancy)
         {
-            //Добавляем вакансию в таблицу
-            db.vacancy.Add(vacancy);
-            db.SaveChanges();
-            // перенаправляем на главную страницу
-            return RedirectToAction("MyCompanies");
+            if (ModelState.IsValid)
+            {
+                //Добавляем вакансию в таблицу
+                db.vacancy.Add(vacancy);
+                db.SaveChanges();
+                // перенаправляем на главную страницу
+                return RedirectToAction("MyCompanies");
+            }
+
+            return Create(vacancy);
         }
         //---------------------------------------------------------------------------------
         //Изменение вакансии
@@ -58,7 +63,9 @@ namespace Everyday.Controllers
             if (vacancy != null)
             {
                 // Создаем список компаний для передачи в представление
-                SelectList companies = new SelectList(db.company, "CompanyId", "CompanyName", vacancy.CompanyId);
+                User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
+                SelectList companies = new SelectList(db.company.Where(f => f.UserId == us.UserId), "CompanyId", "CompanyName", vacancy.CompanyId);
+
                 ViewBag.company = companies;
                 return View(vacancy);
             }
@@ -70,10 +77,18 @@ namespace Everyday.Controllers
         [HttpPost]
         public ActionResult Edit(Vacancy vacancy)
         {
-            db.Entry(vacancy).State = EntityState.Modified;
+            if (ModelState.IsValid)
+            {
+                db.Entry(vacancy).State = EntityState.Modified;
 
-            db.SaveChanges();
-            return RedirectToAction("MyCompanies");
+                db.SaveChanges();
+                return RedirectToAction("MyCompanies");
+            }
+            User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
+            SelectList companies = new SelectList(db.company.Where(f => f.UserId == us.UserId), "CompanyId", "CompanyName", vacancy.CompanyId);
+           
+            ViewBag.company = companies;
+            return View(vacancy);
         }
         //---------------------------------------------------------------------------------
         //Cоздание компании
@@ -92,12 +107,20 @@ namespace Everyday.Controllers
         [HttpPost]
         public ActionResult CreateCompany(Company company, int id)
         {
-            //Добавляем компани в таблицу
-            company.UserId = id;
-            db.company.Add(company);
-            db.SaveChanges();
-            // перенаправляем на главную страницу
-            return RedirectToAction("MyCompanies");
+            if (ModelState.IsValid)
+            {
+                //Добавляем компани в таблицу
+                company.UserId = id;
+                db.company.Add(company);
+                db.SaveChanges();
+                // перенаправляем на главную страницу
+
+
+                return RedirectToAction("MyCompanies");
+            }
+
+            return CreateCompany(id);
+
         }
         //---------------------------------------------------------------------------------
         //Изменение компании
@@ -127,9 +150,14 @@ namespace Everyday.Controllers
         [HttpPost]
         public ActionResult EditCompany(Company companyo)
         {
-            db.Entry(companyo).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("MyCompanies");
+            if (ModelState.IsValid)
+            {
+                db.Entry(companyo).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("MyCompanies");
+            }
+
+            return View(companyo);
         }
         //---------------------------------------------------------------------------------
         //Список(вывод) вакансий
@@ -257,21 +285,30 @@ namespace Everyday.Controllers
         [HttpPost]
         public ActionResult CreateResume(Resume resume, int id , HttpPostedFileBase PhotoImage)
         {
-            if(PhotoImage== null) { return CreateResume(id); }
+            if (ModelState.IsValid)
+            {
+                if (PhotoImage == null)
+                {
+                    return CreateResume(id);
+                }
 
-            
+
                 byte[] imageData;
                 using (var binaryReader = new BinaryReader(PhotoImage.InputStream))
                 {
-                   imageData = binaryReader.ReadBytes(PhotoImage.ContentLength);
+                    imageData = binaryReader.ReadBytes(PhotoImage.ContentLength);
                 }
+
                 resume.Photo = imageData;
-            
-            resume.UserId = id;
-            db.resume.Add(resume);
-            db.SaveChanges();
-            // перенаправляем на главную страницу
-            return RedirectToAction("MyResumes");
+
+                resume.UserId = id;
+                db.resume.Add(resume);
+                db.SaveChanges();
+                // перенаправляем на главную страницу
+                return RedirectToAction("MyResumes");
+            }
+
+            return CreateResume(id);
         }
         //---------------------------------------------------------------------------------
         //Вывод резюме пользователя
@@ -325,21 +362,27 @@ namespace Everyday.Controllers
         [HttpPost]
         public ActionResult EditResume(Resume rso, HttpPostedFileBase PhotoImage)
         {
-            if (PhotoImage != null)
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                if (PhotoImage != null)
                 {
-                    using (var binaryReader = new BinaryReader(PhotoImage.InputStream))
+                    if (ModelState.IsValid)
                     {
-                        byte[] imageData = null;
-                        imageData = binaryReader.ReadBytes(PhotoImage.ContentLength);
-                        rso.Photo = imageData;
+                        using (var binaryReader = new BinaryReader(PhotoImage.InputStream))
+                        {
+                            byte[] imageData = null;
+                            imageData = binaryReader.ReadBytes(PhotoImage.ContentLength);
+                            rso.Photo = imageData;
+                        }
                     }
                 }
-            } 
-            db.Entry(rso).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("MyResumes");     
+
+                db.Entry(rso).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("MyResumes");
+            }
+
+            return View(rso);
         }
         //---------------------------------------------------------------------------------
         //Заявки(резюме)на вакансию
