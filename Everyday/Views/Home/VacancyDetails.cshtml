@@ -1,0 +1,86 @@
+﻿@model  Everyday.Models.Vacancy
+
+@{
+    ViewBag.Title = "VacancyDetails";
+}
+
+
+<link href="/Content/forresume.css" rel="stylesheet">
+<h2>Заявки на эту вакансию</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            Имя
+        </th>
+        <th>
+            Возраст
+        </th>
+        <th>
+            Почта
+        </th>
+        <th>
+            Мобильный
+        </th>
+        <th>
+            Об
+        </th>
+        <th>
+            Фото
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+
+            @foreach (var z in ViewBag.r)
+            {
+              
+    <tr>
+        <td>
+            @z.UserName
+        </td>
+        <td>
+            @z.UserAge
+        </td>
+        <td>
+            @z.UserEmail
+        </td>
+        <td>
+            @z.MobileNumber
+        </td>
+        <td>
+            <div style="overflow-y: scroll; width: 350px; height: 230px;">
+            @z.About
+             </div>
+        </td>
+        <td>
+            <div style="   position:relative; overflow:hidden;  width:250px; height:250px;  ">
+                <img src="@String.Format(" data:image/jpg;base64,{0}", Convert.ToBase64String(z.Photo))" style="  position:absolute;  transform:translate(10% , 5% );  width:250px; height:250px; object-fit:cover; " />
+            </div>
+
+
+        </td>
+        <td>
+
+            @using (Html.BeginForm("DeleteThisResume", "Home", FormMethod.Post))
+            {
+                <input id="prodId" name="id" type="hidden" value="@z.ResumeId">
+                <input id="prodId" name="idvac" type="hidden" value="@ViewBag.er">
+                <input type="submit" value="Delete" class="delbut" style=" background-color: #70c4a5;  background:none ;color: #89cc96; border: none; top: 20px; font-family: Roboto,sans-serif;outline: 0 !important;transition: background-color 0.2s linear;  height: 35px; "/>
+            }
+
+
+
+           
+        </td>
+    </tr>
+
+                
+
+            }
+
+        
+                </table>

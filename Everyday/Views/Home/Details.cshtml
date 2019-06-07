@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Everyday.Models.Vacancy>
+
+@{
+    ViewBag.Title = "Details";
+}
+<link href="/Content/common.css" rel="stylesheet">
+<link href="/Content/forlist.css" rel="stylesheet">
+<h2>Вакансии</h2>
+
+<p>
+    @Html.ActionLink(" Создать вакансию", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th class="thgreen">
+            Название вакансии
+        </th>
+        <th  class="thgreen">
+          Зарплата
+        </th>
+        <th  class="thgreen">
+            Компания
+        </th>
+        <th  class="thgreen">
+           О вакансии
+        </th>
+        <th  class="thgreen">
+          Город
+        </th>
+        <th  class="thgreen">
+           Почта
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.CompanyId.Equals(ViewBag.searchId))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VacancyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                </td>
+                <td>
+                    <div style="overflow-y: scroll; width: 450px; height: 135px;">
+                        @Html.DisplayFor(modelItem => item.About)
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.CompanyEmail)
+                </td>
+                <td>
+                    <div class="smen" style="display: flex; justify-content: center; flex-direction: column">
+                    @Html.ActionLink("Изменить", "Edit", new {id = item.VacancyId}) 
+                    @Html.ActionLink("Удалить ", "DeleteVacancy", new {id = item.VacancyId}) 
+                    @Html.ActionLink("Заявки", "VacancyDetails", new {id = item.VacancyId})
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+
+

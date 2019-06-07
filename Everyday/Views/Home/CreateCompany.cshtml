@@ -1,0 +1,47 @@
+﻿@model Everyday.Models.Company
+
+@{
+    ViewBag.Title = "CreateCompany";
+}
+<link href="/Content/forcreate.css" rel="stylesheet"> 
+<link href="/Content/regsin.css" rel="stylesheet">
+<link href="/Content/common.css" rel="stylesheet">
+<h2>Создание компании</h2> 
+<hr/>
+@using (Html.BeginForm())
+{
+    <fieldset>
+   
+        <div style="display:flex;  flex-direction: row">
+            <p>
+                <br />
+                @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new {@placeholder = " Название компании ", @style="width:400px;"} })      <br />
+                @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" }) 
+            </p>
+          
+
+            <p style="margin-left: 15px;">
+                <br />
+                @Html.EditorFor(model => model.CompanyEmail,new { htmlAttributes = new {@placeholder = "Email " , @style="width:400px;"} })      <br />
+                @Html.ValidationMessageFor(model => model.CompanyEmail, "", new { @class = "text-danger" }) 
+            </p>
+          
+        </div>
+        <p>
+            <br />
+            @Html.TextAreaFor(model => model.About, new {@placeholder = " О компании  "} )
+            
+        </p>
+        @Html.ValidationMessageFor(model =>model.About, "", new { @class = "text-danger" }) 
+      
+        <p>
+
+            <input id="prodId" name="id" type="hidden" value="@ViewBag.id">
+
+        </p>
+
+        <p>
+            <input type="submit" value="Создать компанию" />
+        </p>
+    </fieldset>
+}

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Cabinet";
+}
+<link href="/Content/common.css" rel="stylesheet">
+<h2>Кабинет пользователя</h2>
+
+<hr/>
+
+
+<h3 style="color: #68aa90;">
+@ViewBag.usn
+</h3>
+
+
+@Html.ActionLink("Мои компании", "MyCompanies")<br>
+@Html.ActionLink("Мои резюме", "MyResumes")<br>
+@Html.ActionLink("Выход", "Logoff", "Account")
+

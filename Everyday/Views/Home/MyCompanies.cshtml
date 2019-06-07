@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Everyday.Models.Company>
+
+@{
+    ViewBag.Title = "MyCompanies";
+}
+<link href="/Content/common.css" rel="stylesheet">
+<link href="/Content/forlist.css" rel="stylesheet">
+<h2> Мои компании</h2>
+
+<p>
+    @Html.ActionLink("Cоздзать компанию", "CreateCompany", new { id = ViewBag.id })
+</p>
+<table class="table">
+    <tr>
+        
+        <th class="thgreen">
+          Название компании
+        </th>
+        <th class="thgreen">
+           Почта
+        </th>
+        <th class="thgreen" class="thgreen" >
+           О компании
+        </>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+
+
+
+
+
+
+    if (item.User.UserEmail == ViewBag.el) 
+    {
+    <tr>
+
+
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyEmail)
+        </td>
+        
+        <td>
+            <div style="overflow-y: scroll; width: 630px; height: 135px;">
+                @Html.DisplayFor(modelItem => item.About)
+            </div>
+        </td>
+        <td>
+            <div class="smen" style="display: flex; justify-content: center; flex-direction: column">
+            @Html.ActionLink("Изменить", "EditCompany", new {id = item.CompanyId , @class="atobutton"}) 
+            @Html.ActionLink("Вакансии", "Details", new {id = item.CompanyId, @class="atobutton"}) 
+            @Html.ActionLink("Удалить", "DeleteCompany", new {id = item.CompanyId, @class="atobutton"})
+            </div>
+        </td>
+    </tr>
+}
+}
+
+</table>

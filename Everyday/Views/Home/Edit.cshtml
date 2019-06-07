@@ -1,0 +1,54 @@
+﻿@model Everyday.Models.Vacancy
+
+@{
+    ViewBag.Title = "Edit";
+}
+<link href="/Content/forcreate.css" rel="stylesheet">
+<link href="/Content/common.css" rel="stylesheet">
+<link href="/Content/regsin.css" rel="stylesheet">
+<h2>Содздание вакансии</h2>
+<hr>
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+     
+        @Html.HiddenFor(model => model.VacancyId)
+        <div style="display: flex; justify-self: center; flex-direction: column">
+            <div style="display: flex; justify-self: center; flex-direction: row">
+                <p >
+                    <br/>
+                    @Html.EditorFor(model => model.VacancyName, new {htmlAttributes = new {@placeholder = " Название вакансии ", @style = "width:400px;"}})<br/>
+                    @Html.ValidationMessageFor(model => model.VacancyName, "", new { @class = "text-danger" })
+                </p>
+
+                <p style="margin-left: 15px;">
+                    <br/>
+                    @Html.EditorFor(model => model.City, new {htmlAttributes = new {@placeholder = "Город ", @style = "width:400px;"}})<br/>
+                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                </p>
+            </div>
+            <div style="display: flex; justify-self: center; flex-direction: row;">
+                <p >
+                    <br/>
+                    @Html.EditorFor(model => model.Salary, new {htmlAttributes = new {@placeholder = "Зарплата", @style = "width:400px;"}})<br/>
+                    @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+                </p>
+                <p style="margin-left: 30px;">
+                    <br/>
+                    @Html.DropDownListFor(model => model.CompanyId, ViewBag.company as SelectList,"Компания",new {htmlAttributes = new { @style = "width:400px; outline:none;"}})<br/>
+                    @Html.ValidationMessageFor(model => model.CompanyId, "", new { @class = "text-danger" })
+                </p>
+            </div>
+        </div>
+        <p>
+           <br />
+            @Html.TextAreaFor(model => model.About,new {@placeholder = " О вакансии  " })<br/>
+        </p>
+        @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+        <p>
+            <input type="submit" value="Добавить вакансию" />
+        </p>
+    </fieldset>
+}
+

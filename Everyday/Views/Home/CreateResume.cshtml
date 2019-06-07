@@ -1,0 +1,168 @@
+﻿
+
+@model Everyday.Models.Resume
+
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "CreateResume";
+}
+
+
+
+<link rel="stylesheet" href="bower_components/jcrop/css/jquery.Jcrop.css" />
+<link href="/Content/regsin.css" rel="stylesheet">
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jcrop/js/jquery.Jcrop.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/ng-jcrop/ng-jcrop.js"></script>
+<link href="~/Content/jquery.Jcrop.css" rel="stylesheet" />
+
+
+
+
+<link href="/Content/common.css" rel="stylesheet">
+
+<link href="/Content/forcreate.css" rel="stylesheet">
+<h2>Создание резюме</h2>
+<hr/>
+@using (Html.BeginForm("CreateResume", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+
+<fieldset>
+
+
+    <p>
+
+        @Html.EditorFor(model => model.ResumeName, new { htmlAttributes = new { @placeholder = " Название резюме (название видите только Вы) " } })
+       
+    </p>
+    @Html.ValidationMessageFor(model => model.ResumeName, "", new { @class = "text-danger" })
+    <p>
+        <br />
+        @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @placeholder = "ФИО", @Value = ViewBag.usname } })
+        
+    </p>
+    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+    <p>
+        <br />
+        @Html.EditorFor(model => model.UserAge, new { htmlAttributes = new { @placeholder = "Возраст", @Value = ViewBag.usage } })
+   
+    </p>
+    @Html.ValidationMessageFor(model => model.UserAge, "", new { @class = "text-danger" })
+
+    <p>
+        <br />
+        @Html.EditorFor(model => model.UserEmail, new { htmlAttributes = new { @placeholder = "  Почта", @Value = ViewBag.usemail } })
+      
+    </p>
+    @Html.ValidationMessageFor(model => model.UserEmail, "", new { @class = "text-danger" })
+    <p>
+        <br />
+        @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @placeholder = "Мобильный ", @Value = ViewBag.usmobile } })
+      
+    </p>
+
+    @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+    <p>
+        <br />
+        @Html.TextAreaFor(model => model.About, new { @placeholder = " О себе" })
+  
+    </p>
+    @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+
+
+    <p>
+
+        <input id="prodId" name="id" type="hidden" value="@ViewBag.id">
+
+    </p>
+
+
+
+
+
+    <br/>
+       Фото ( обязательно )    <br/> <br/>
+    <input type="file" id="FileUpload1" name="PhotoImage" />
+
+    <br />
+    <table border="0" cellpadding="0" cellspacing="5">
+        <tr>
+            <td>
+                
+                <img height="250px" id="Image1" value="Фото" src="" alt="" style="display: none" style="visibility: hidden;"/>
+              
+            </td>
+
+        </tr>
+    </table>
+    @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+    <br />
+
+   
+
+
+
+
+    <br />
+    <p>
+        <input type="submit" value="Создание резюме" />
+    </p>
+
+</fieldset>
+}
+
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/tapmodo/Jcrop/master/js/jquery.Jcrop.min.js"></script>
+<script type="text/javascript">
+        $(function () {
+            $('#FileUpload1').change(function () {
+                $('#Image1').hide();
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#Image1').show();
+                    $('#Image1').attr("src", e.target.result);
+                    $('#Image1').Jcrop({
+                        onChange: SetCoordinates,
+                        onSelect: SetCoordinates
+                    });
+                }
+                reader.readAsDataURL($(this)[0].files[0]);
+            });
+
+            $('#btnCrop').click(function () {
+                var x1 = $('#imgX1').val();
+                var y1 = $('#imgY1').val();
+                var width = $('#imgWidth').val();
+                var height = $('#imgHeight').val();
+                var canvas = $("#canvas")[0];
+                var context = canvas.getContext('2d');
+                var img = new Image();
+                img.onload = function () {
+                    canvas.height = height;
+                    canvas.width = width;
+                    context.drawImage(img, x1, y1, width, height, 0, 0, width, height);
+                    $('#imgCropped').val(canvas.toDataURL());
+                    $('#btnUpload').show();
+                };
+                img.src = $('#Image1').attr("src");
+            });
+        });
+        function SetCoordinates(c) {
+            $('#imgX1').val(c.x);
+            $('#imgY1').val(c.y);
+            $('#imgWidth').val(c.w);
+            $('#imgHeight').val(c.h);
+            $('#btnCrop').show();
+        };
+</script>
+
+
+
