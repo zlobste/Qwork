@@ -34,7 +34,6 @@ namespace Everyday.Models
         
 
         [Column("Salary")]
-        [Required(ErrorMessage = "зарплата не указана")]
         [Display(Name = "Зарплата")]
         public double? Salary { get; set; }
         

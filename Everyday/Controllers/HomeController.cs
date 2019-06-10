@@ -523,7 +523,28 @@ namespace Everyday.Controllers
             return View(resumes.ToList());
         }
         
-        
+        //..................................................................................
+        public ActionResult EditVision(int? id)
+        {
+            Resume rso = db.resume.Find(id);
+
+            if (rso.Vision == 1)
+            {
+                rso.Vision = 0;
+            }
+            else if(rso.Vision == 0)
+            {
+                rso.Vision = 1;
+            }
+
+            db.Entry(rso).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("MyResumes");
+
+
+      
+            
+        }
         
         
 

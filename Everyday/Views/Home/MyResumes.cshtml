@@ -9,7 +9,7 @@
 <link href="/Content/forlist.css" rel="stylesheet">
 <link href="/Content/forresume.css" rel="stylesheet">
 
-<div style="display: flex; justify-content: start; flex-direction: column; margin-left: -5%;">
+<div style="display: flex; justify-content: start; flex-direction: column; margin-left: -90px;">
     <h2> Мои резюме</h2>
 
     <p>
@@ -92,6 +92,14 @@ else
                 <div class="smen" style="display: flex; justify-content: center; flex-direction: column; margin-top: -20px;">
                 @Html.ActionLink("Изменить", "EditResume", new {id = item.ResumeId}) 
                 @Html.ActionLink("Удалить", "DeleteResume", new {id = item.ResumeId})
+                @if (item.Vision == 1)
+                {
+                    @Html.ActionLink("Для всех", "EditVision", new {id = item.ResumeId})
+                }
+                else
+                {
+                    @Html.ActionLink("Приватное", "EditVision",  new {id = item.ResumeId})
+                }
                  </div>
             </td>
         </tr>
