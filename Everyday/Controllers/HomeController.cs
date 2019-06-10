@@ -44,8 +44,12 @@ namespace Everyday.Controllers
                 // перенаправляем на главную страницу
                 return RedirectToAction("MyCompanies");
             }
+            User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
+            SelectList companies = new SelectList(db.company.Where(f => f.UserId == us.UserId), "CompanyId", "CompanyName", vacancy.CompanyId);
+           
+            ViewBag.company = companies;
+            return View(vacancy);
 
-            return Create(vacancy);
         }
         //---------------------------------------------------------------------------------
         //Изменение вакансии
@@ -300,14 +304,15 @@ namespace Everyday.Controllers
                 }
 
                 resume.Photo = imageData;
-
+                 resume.Vision = 0;
                 resume.UserId = id;
                 db.resume.Add(resume);
                 db.SaveChanges();
                 // перенаправляем на главную страницу
                 return RedirectToAction("MyResumes");
             }
-
+            
+           
             return CreateResume(id);
         }
         //---------------------------------------------------------------------------------
@@ -499,6 +504,28 @@ namespace Everyday.Controllers
         }
 
 
+        
+        public ActionResult SearchByResume(string searchString, string searchCity)
+        {
+          
+            if (searchString == null)
+            {
+                searchString = "";
+            }
+            if (searchCity == null)
+            {
+                searchCity = "";
+            }
+           
+            ViewBag.s = searchString;
+            ViewBag.c = searchCity;
+            var resumes = db.resume;
+            return View(resumes.ToList());
+        }
+        
+        
+        
+        
 
 
 

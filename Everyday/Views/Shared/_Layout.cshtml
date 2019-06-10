@@ -23,6 +23,7 @@
                 <ul class="nav navbar-nav" >
                     @* <li >@Html.ActionLink("Гавная", "Index", "Home",new { area = "" }, new { style=" color: white; "})</li> *@
                      <li>@Html.ActionLink("Мой кабинет", "Cabinet", "Home",new { area = "" }, new { style=" color: white;"})</li> 
+                    <li>@Html.ActionLink("Найти резюме", "SearchByResume", "Home",new { area = "" }, new { style=" color: white;"})</li> 
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li>@Html.ActionLink("Выход", "Logoff", "Account",new { area = "" }, new { style=" color: white;"})</li>

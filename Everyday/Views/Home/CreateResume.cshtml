@@ -3,9 +3,7 @@
 @model Everyday.Models.Resume
 
 @{
-    /**/
-
-    /**/
+ 
 
     ViewBag.Title = "CreateResume";
 }
@@ -34,7 +32,7 @@
 
 <fieldset>
 
-
+    
     <p>
 
         @Html.EditorFor(model => model.ResumeName, new { htmlAttributes = new { @placeholder = " Название резюме (название видите только Вы) " } })
@@ -48,9 +46,21 @@
     </p>
     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
     <p>
-        <br />
-        @Html.EditorFor(model => model.UserAge, new { htmlAttributes = new { @placeholder = "Возраст", @Value = ViewBag.usage } })
-   
+        
+        
+        <p>
+            <br />
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @placeholder = "Город" } })
+        
+        </p>
+        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+        
+        
+        
+        <br/>
+        @Html.EditorFor(model => model.UserAge, new {htmlAttributes = new {@placeholder = "Возраст", @Value = ViewBag.usage}})
+
     </p>
     @Html.ValidationMessageFor(model => model.UserAge, "", new { @class = "text-danger" })
 
@@ -73,16 +83,13 @@
   
     </p>
     @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
-
+    <br/>
 
     <p>
 
         <input id="prodId" name="id" type="hidden" value="@ViewBag.id">
 
     </p>
-
-
-
 
 
     <br/>
@@ -103,11 +110,10 @@
     @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
     <br />
 
-   
-
-
-
-
+    
+    
+    
+    
     <br />
     <p>
         <input type="submit" value="Создание резюме" />

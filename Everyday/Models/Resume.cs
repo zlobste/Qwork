@@ -53,18 +53,32 @@ namespace Everyday.Models
             [Column("About")]
             public string About { get; set; }
 
+            
+            
+            
             [Display(Name = "Фото")]
-            [Required(ErrorMessage = "Фотография обязательна в резюме")]
+            //[Required(ErrorMessage = "Фотография обязательна в резюме")]
             [Column("Photo")]
             public byte[] Photo { get; set; }
+            
+            
+            
             
             [StringLength(50, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
             [Display(Name = "Название резюме")]
             [Column("ResumeName")]
             [Required(ErrorMessage = "название не указано")]
             public string ResumeName { get; set; }
+            
 
-
+            [StringLength(100, MinimumLength = 3, ErrorMessage = "Длина строки должна быть от 3 до 100 символов")]
+            [Required(ErrorMessage = "город не указан")]
+            [Display(Name = "Город")]
+            [Column("City")]
+            public string City { get; set; }
+            
+            [Column("Vision")]
+            public int? Vision{ get; set; }
 
             public User User { get; set; }//навигационным свойством - при получении данных об игроке оно будет автоматически получать данные из БД.
      
