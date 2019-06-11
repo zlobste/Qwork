@@ -245,6 +245,7 @@ namespace Everyday.Controllers
                 searchCity = "";
             }
 
+            ViewBag.m = us.VacancyMarks;
             ViewBag.salary = salary;
             ViewBag.s = searchString;
             ViewBag.c = searchCity;
@@ -628,7 +629,7 @@ namespace Everyday.Controllers
 
         
         [Authorize]
-        public ActionResult DeleteVacancyMark(int? id )
+        public ActionResult DeleteVacancyMark(int? id , int st , string searchString, string searchCity, string salary)
         {
             User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
 
@@ -639,6 +640,13 @@ namespace Everyday.Controllers
             if (us.VacancyMarks == "" || us.VacancyMarks == " " || us.VacancyMarks == null)
             {
                 return RedirectToAction("Cabinet");
+            }
+
+           
+            if (st == 1)
+            {
+                return RedirectToAction("Index",
+                    new {searchString = searchString, searchCity = searchCity, salary = salary});
             }
 
             return RedirectToAction("VacancyMarks");

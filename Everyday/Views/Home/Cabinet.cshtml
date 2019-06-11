@@ -17,11 +17,11 @@
 @Html.ActionLink("Мои резюме", "MyResumes")<br>
 @if (ViewBag.us == "" || ViewBag.us == " " || ViewBag.us == null)
 {
-    <a style="color: brown; text-decoration: none;">Закладки</a><br>
+    <a style="color: brown; text-decoration: none;">Закладки вакансий</a><br>
 }
 else
 {
-    @Html.ActionLink("Закладки", "VacancyMarks")<br>
+    @Html.ActionLink("Закладки вакансий", "VacancyMarks")<br>
 }
 @Html.ActionLink("Выход", "Logoff", "Account")
 

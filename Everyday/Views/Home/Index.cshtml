@@ -161,9 +161,28 @@ else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false) //есть го�
 
                             }
                             <p style="margin-left: 22px;">
-                                
-                                    @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
-                                
+                                @{
+                                      int s = 0;
+                                      foreach (string a in ViewBag.m.Split( ' ' ))
+                                      {
+                                            if (a == Convert.ToString(item.VacancyId))
+                                            {
+                                                s += 1;
+                                                break;
+                                            }
+    
+                                      }
+                                      if(s==0)
+                                      {
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                      }
+                                      else
+                                      {
+                                         
+                                          @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                     }
+                                    
+                                }
                             </p>
                            
                            
@@ -229,6 +248,30 @@ else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false) //есть го�
                                 <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
 
                             }
+                            <p style="margin-left: 22px;">
+                                @{
+                                    int s = 0;
+                                    foreach (string a in ViewBag.m.Split( ' ' ))
+                                    {
+                                        if (a == Convert.ToString(item.VacancyId))
+                                        {
+                                            s += 1;
+                                            break;
+                                        }
+    
+                                    }
+                                    if(s==0)
+                                    {
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                    }
+                                    else
+                                    {
+                                         
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                    }
+                                    
+                                }
+                            </p>
                         }
                     </td>
                 </tr>
@@ -288,6 +331,30 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("")) //есть  на
                                 <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
 
                             }
+                            <p style="margin-left: 22px;">
+                                @{
+                                    int s = 0;
+                                    foreach (string a in ViewBag.m.Split( ' ' ))
+                                    {
+                                        if (a == Convert.ToString(item.VacancyId))
+                                        {
+                                            s += 1;
+                                            break;
+                                        }
+    
+                                    }
+                                    if(s==0)
+                                    {
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                    }
+                                    else
+                                    {
+                                         
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                    }
+                                    
+                                }
+                            </p>
                         }
                     </td>
 
@@ -340,6 +407,30 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("")) //есть  на
 
                                 <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
                             }
+                            <p style="margin-left: 22px;">
+                                @{
+                                    int s = 0;
+                                    foreach (string a in ViewBag.m.Split( ' ' ))
+                                    {
+                                        if (a == Convert.ToString(item.VacancyId))
+                                        {
+                                            s += 1;
+                                            break;
+                                        }
+    
+                                    }
+                                    if(s==0)
+                                    {
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                    }
+                                    else
+                                    {
+                                         
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                    }
+                                    
+                                }
+                            </p>
                         }
                     </td>
 
@@ -394,6 +485,30 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("") == false) //ес�
                                 <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
 
                             }
+                            <p style="margin-left: 22px;">
+                                @{
+                                    int s = 0;
+                                    foreach (string a in ViewBag.m.Split( ' ' ))
+                                    {
+                                        if (a == Convert.ToString(item.VacancyId))
+                                        {
+                                            s += 1;
+                                            break;
+                                        }
+    
+                                    }
+                                    if(s==0)
+                                    {
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                    }
+                                    else
+                                    {
+                                         
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                    }
+                                    
+                                }
+                            </p>
                         }
                     </td>
 
@@ -451,6 +566,30 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("") == false) //ес�
                                 <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
 
                             }
+                            <p style="margin-left: 22px;">
+                                @{
+                                    int s = 0;
+                                    foreach (string a in ViewBag.m.Split( ' ' ))
+                                    {
+                                        if (a == Convert.ToString(item.VacancyId))
+                                        {
+                                            s += 1;
+                                            break;
+                                        }
+    
+                                    }
+                                    if(s==0)
+                                    {
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                    }
+                                    else
+                                    {
+                                         
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                    }
+                                    
+                                }
+                            </p>
                         }
                     </td>
 
