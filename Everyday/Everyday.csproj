@@ -252,6 +252,7 @@
     <Content Include="Content\forresume.css" />
     <Content Include="Content\Index.css" />
     <Content Include="Content\regsin.css" />
+    <Content Include="Content\select.css" />
     <Content Include="Content\special.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -272,6 +273,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Views\Home\SearchByResume.cshtml" />
     <Content Include="Views\Home\SeeCompany.cshtml" />
+    <Content Include="Views\Home\VacancyMarks.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

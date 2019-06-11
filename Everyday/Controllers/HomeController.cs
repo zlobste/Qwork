@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using Microsoft.Ajax.Utilities;
 
 namespace Everyday.Controllers
 {
@@ -258,6 +259,7 @@ namespace Everyday.Controllers
         {
             User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
             ViewBag.usn = us.UserName;
+            ViewBag.us = us.VacancyMarks;
             return View();
         }
         //---------------------------------------------------------------------------------
@@ -450,6 +452,10 @@ namespace Everyday.Controllers
                     vac.Resume = "" + idres;
 
                 }
+                else if (vac.Resume == "")
+                {
+                    vac.Resume += idres;
+                }
                 else {
                     vac.Resume += (" " + idres);
                 }
@@ -547,6 +553,97 @@ namespace Everyday.Controllers
         }
         
         
+        
+        //обавление резюме
+        [Authorize]
+        public ActionResult AddVacancyMark(int? id, string searchString, string searchCity, string salary)
+
+        {
+
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
+                if (us.VacancyMarks == null)
+                {
+                    us.VacancyMarks = "" + id;
+
+                }
+                else if (us.VacancyMarks == "")
+                {
+                    us.VacancyMarks += id;
+                }
+                else
+                {
+                    us.VacancyMarks += (" " + id);
+                }
+
+
+                db.Entry(us).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index",new {  searchString = searchString, searchCity=searchCity, salary=salary });
+             
+
+            }
+        }
+        
+        
+        
+        [Authorize]
+        public ActionResult VacancyMarks()
+        {
+                User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
+                SelectList rezimes =new SelectList(db.resume.Where(f => f.UserId == us.UserId), "ResumeId", "UserEmail");
+                ViewBag.rezimes = rezimes;
+                ViewBag.sel = db.resume.Where(f => f.UserId == us.UserId);
+
+                List<Vacancy> vac = new List<Vacancy>();
+                var vacancies = db.vacancy.Include(v => v.Company);
+                vacancies.ToList();
+
+                
+                foreach (var t in us.VacancyMarks.Split(' '))
+                {
+                    foreach (var m in vacancies)
+                    {
+                        if (m.VacancyId == Convert.ToInt32(t))
+                        {
+                            vac.Add(m);
+                            break;
+
+                        }
+
+                    }
+
+                }
+
+                return View(vac);
+        }
+          
+
+        
+
+        
+        [Authorize]
+        public ActionResult DeleteVacancyMark(int? id )
+        {
+            User us = db.user.FirstOrDefault(topic => topic.UserEmail == User.Identity.Name);
+
+            string[] s = us.VacancyMarks.Split(' ');
+            delByIndex(ref s, s.IndexOf(Convert.ToString(id)));        
+            us.VacancyMarks= string.Join(" ", s);
+            db.SaveChanges();
+            if (us.VacancyMarks == "" || us.VacancyMarks == " " || us.VacancyMarks == null)
+            {
+                return RedirectToAction("Cabinet");
+            }
+
+            return RedirectToAction("VacancyMarks");
+        }
+
 
 
 

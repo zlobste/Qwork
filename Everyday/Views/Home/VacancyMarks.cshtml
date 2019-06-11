@@ -1,0 +1,89 @@
+
+@model IEnumerable<Everyday.Models.Vacancy>
+@{
+    ViewBag.Title = "VacancyMarks";
+}
+
+<link href="/Content/forlist.css" rel="stylesheet">
+<link href="/Content/Index.css" rel="stylesheet">
+<link href="/Content/select.css" rel="stylesheet">
+<h2>Закладки вакансий</h2>
+<br>
+<table class="table">
+    <tr>
+        <th class="thgreen">
+            Название вакансии
+        </th>
+        <th class="thgreen">
+            Зарплата/грн
+        </th>
+        <th class="thgreen">
+            Компания
+        </th>
+        <th class="thgreen">
+            О вакансии
+        </th>
+        <th class="thgreen">
+            Город
+        </th>
+        <th class="thgreen">
+            Почта
+        </th>
+        <th></th>
+    </tr>
+
+  
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.VacancyName
+                </td>
+                <td>
+                    @item.Salary
+                </td>
+                <td>
+                    @item.Company.CompanyName <br> @Html.ActionLink("Подробнее", "SeeCompany", new {id = item.Company.CompanyId, @class = "atobutton"})
+
+                </td>
+                <td>
+                    <div style="overflow-y: scroll; width: 450px; height: 135px;">
+                        @item.About
+                    </div>
+                </td>
+                <td>
+                    @item.City
+                </td>
+                <td>
+                    @item.Company.CompanyEmail
+                </td>
+
+
+                <td class="postres">
+
+
+                    @using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                    {
+
+                        <input type="submit" value="Добавить вакансию" class="bot"/>
+                        @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
+
+                        <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
+
+                    }
+                    <p style="margin-left: 22px;">
+                       
+                            @Html.ActionLink("Удалить", "DeleteVacancyMark", new {id = item.VacancyId})
+                        
+                    </p>
+
+                </td>
+            </tr>
+        
+
+    }
+</table>
+
+        
+

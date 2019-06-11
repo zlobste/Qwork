@@ -15,5 +15,13 @@
 
 @Html.ActionLink("Мои компании", "MyCompanies")<br>
 @Html.ActionLink("Мои резюме", "MyResumes")<br>
+@if (ViewBag.us == "" || ViewBag.us == " " || ViewBag.us == null)
+{
+    <a style="color: brown; text-decoration: none;">Закладки</a><br>
+}
+else
+{
+    @Html.ActionLink("Закладки", "VacancyMarks")<br>
+}
 @Html.ActionLink("Выход", "Logoff", "Account")
 

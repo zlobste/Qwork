@@ -45,7 +45,13 @@ namespace Everyday.Models
         [Column("Password")]
         public string Password { get; set; }
 
-
+        
+        
+        
+        public string VacancyMarks{ get; set; }
+        
+        
+        
 
         public List<Resume> Resumes { get; set; }
 

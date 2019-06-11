@@ -19,6 +19,9 @@
 
 <link href="/Content/forlist.css" rel="stylesheet">
 <link href="/Content/Index.css" rel="stylesheet">
+<link href="/Content/select.css" rel="stylesheet">
+
+
 
 
 <div class="searchbox">
@@ -145,15 +148,32 @@ else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false) //есть го�
                     <td class="postres">
                         @if (User.Identity.IsAuthenticated)
                         {
+                            
+                            
+                           
                             using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
                             {
+                               
                                 <input type="submit" value="Добавить вакансию" class="bot"/>
-                                @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
+                                @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume" )
 
                                 <input id="prodId" name="idvac" type="hidden" value="@item.VacancyId">
 
                             }
+                            <p style="margin-left: 22px;">
+                                
+                                    @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                
+                            </p>
+                           
+                           
+                           
+                            
                         }
+                       
+                        
+                        
+                        
                     </td>
                 </tr>
 
