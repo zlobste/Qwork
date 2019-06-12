@@ -44,7 +44,7 @@
                     @item.Salary
                 </td>
                 <td>
-                    @item.Company.CompanyName <br> @Html.ActionLink("Подробнее", "SeeCompany", new {id = item.Company.CompanyId, @class = "atobutton"})
+                    @item.Company.CompanyName <br> @Html.ActionLink("Подробнее", "SeeCompany", new {controller="Company",id = item.Company.CompanyId, @class = "atobutton"})
 
                 </td>
                 <td>
@@ -63,7 +63,7 @@
                 <td class="postres">
 
 
-                    @using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                    @using (Html.BeginForm("AddResume", "Resume", FormMethod.Post))
                     {
 
                         <input type="submit" value="Добавить вакансию" class="bot"/>
@@ -73,9 +73,9 @@
 
                     }
                     <p style="margin-left: 22px;">
-                       
-                            @Html.ActionLink("Удалить", "DeleteVacancyMark", new {id = item.VacancyId , st= 2 })
-                        
+
+                        @Html.ActionLink("Удалить", "DeleteVacancyMark", new {controller="Vacancy",id = item.VacancyId , st= 2 })
+
                     </p>
 
                 </td>

@@ -47,8 +47,12 @@ namespace Everyday.Models
 
         
         
-        
+        [Column("VacancyMarks")]
         public string VacancyMarks{ get; set; }
+        
+        
+        [Column("ResumeMarks")]
+        public string ResumeMarks{ get; set; }
         
         
         

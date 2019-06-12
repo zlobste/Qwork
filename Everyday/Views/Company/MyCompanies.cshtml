@@ -48,7 +48,7 @@
         <td>
             <div class="smen" style="display: flex; justify-content: center; flex-direction: column">
             @Html.ActionLink("Изменить", "EditCompany", new {id = item.CompanyId , @class="atobutton"}) 
-            @Html.ActionLink("Вакансии", "Details", new {id = item.CompanyId, @class="atobutton"}) 
+            @Html.ActionLink("Вакансии", "Details", new { controller="Vacancy", id = item.CompanyId, @class="atobutton"})  
             @Html.ActionLink("Удалить", "DeleteCompany", new {id = item.CompanyId, @class="atobutton"})
             </div>
         </td>

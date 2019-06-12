@@ -129,7 +129,7 @@ else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false) //есть го�
                         @Html.DisplayFor(modelItem => item.Salary)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Company.CompanyName) <br> @Html.ActionLink("Подробнее", "SeeCompany", new {id = item.Company.CompanyId , @class="atobutton"}) 
+                        @Html.DisplayFor(modelItem => item.Company.CompanyName) <br> @Html.ActionLink("Подробнее",  "SeeCompany",new {controller="Company",id = item.Company.CompanyId , @class="atobutton"}) 
 
                     </td>
                     <td>
@@ -151,7 +151,7 @@ else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false) //есть го�
                             
                             
                            
-                            using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                            using (Html.BeginForm("AddResume", "Resume", FormMethod.Post))
                             {
                                
                                 <input type="submit" value="Добавить вакансию" class="bot"/>
@@ -174,12 +174,12 @@ else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false) //есть го�
                                       }
                                       if(s==0)
                                       {
-                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {controller="Vacancy",id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
                                       }
                                       else
                                       {
                                          
-                                          @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                          @Html.ActionLink("В закладках", "DeleteVacancyMark", new {controller="Vacancy",id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
                                      }
                                     
                                 }
@@ -223,7 +223,7 @@ else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false) //есть го�
                         @Html.DisplayFor(modelItem => item.Salary)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {id = item.Company.CompanyId , @class="atobutton"}) 
+                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {controller="Company",id = item.Company.CompanyId , @class="atobutton"}) 
                     </td>
                     <td>
                         <div style="overflow-y: scroll; width: 450px; height: 135px;">
@@ -240,7 +240,7 @@ else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false) //есть го�
                     <td>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                            using (Html.BeginForm("AddResume", "Resume", FormMethod.Post))
                             {
                                 <input type="submit" value="Добавить вакансию" class="bot"/>
                                 @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
@@ -262,12 +262,12 @@ else if (ViewBag.s.Equals("") && ViewBag.c.Equals("") == false) //есть го�
                                     }
                                     if(s==0)
                                     {
-                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {controller="Vacancy",id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
                                     }
                                     else
                                     {
                                          
-                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {controller="Vacancy",id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
                                     }
                                     
                                 }
@@ -303,7 +303,7 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("")) //есть  на
                         @Html.DisplayFor(modelItem => item.Salary)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {id = item.Company.CompanyId , @class="atobutton"}) 
+                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {controller="Company",id = item.Company.CompanyId , @class="atobutton"}) 
                     </td>
                     <td>
                         <div style="overflow-y: scroll; width: 450px; height: 135px;">
@@ -323,7 +323,7 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("")) //есть  на
                     <td>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                            using (Html.BeginForm("AddResume", "Resume", FormMethod.Post))
                             {
                                 <input type="submit" value="Добавить вакансию" class="bot"/>
                                 @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
@@ -345,12 +345,12 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("")) //есть  на
                                     }
                                     if(s==0)
                                     {
-                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {controller="Vacancy",id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
                                     }
                                     else
                                     {
                                          
-                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {controller="Vacancy",id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
                                     }
                                     
                                 }
@@ -381,7 +381,7 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("")) //есть  на
                         @Html.DisplayFor(modelItem => item.Salary)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {id = item.Company.CompanyId , @class="atobutton"}) 
+                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {controller="Company",id = item.Company.CompanyId , @class="atobutton"}) 
                     </td>
                     <td>
                         <div style="overflow-y: scroll; width: 450px; height: 135px;">
@@ -399,7 +399,7 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("")) //есть  на
                     <td>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                            using (Html.BeginForm("AddResume", "Resume", FormMethod.Post))
                             {
                                 <input type="submit" value="Добавить вакансию" class="bot"/>
                                 @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
@@ -421,12 +421,12 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("")) //есть  на
                                     }
                                     if(s==0)
                                     {
-                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {controller="Vacancy",id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
                                     }
                                     else
                                     {
                                          
-                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {controller="Vacancy",id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
                                     }
                                     
                                 }
@@ -460,7 +460,7 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("") == false) //ес�
                         @Html.DisplayFor(modelItem => item.Salary)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {id = item.Company.CompanyId , @class="atobutton"}) 
+                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {controller="Company",id = item.Company.CompanyId , @class="atobutton"}) 
                     </td>
                     <td>
                         <div style="overflow-y: scroll; width: 450px; height: 135px;">
@@ -477,7 +477,7 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("") == false) //ес�
                     <td>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                            using (Html.BeginForm("AddResume", "Resume", FormMethod.Post))
                             {
                                 <input type="submit" value="Добавить вакансию" class="bot"/>
                                 @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
@@ -499,12 +499,12 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("") == false) //ес�
                                     }
                                     if(s==0)
                                     {
-                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {controller="Vacancy",id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
                                     }
                                     else
                                     {
                                          
-                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {controller="Vacancy",id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
                                     }
                                     
                                 }
@@ -540,7 +540,7 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("") == false) //ес�
                         @Html.DisplayFor(modelItem => item.Salary)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {id = item.Company.CompanyId , @class="atobutton"}) 
+                        @Html.DisplayFor(modelItem => item.Company.CompanyName)<br>@Html.ActionLink("Подробнее", "SeeCompany", new {controller="Company",id = item.Company.CompanyId , @class="atobutton"}) 
                     </td>
                     <td>
                         <div style="overflow-y: scroll; width: 450px; height: 135px;">
@@ -558,7 +558,7 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("") == false) //ес�
                     <td>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            using (Html.BeginForm("AddResume", "Home", FormMethod.Post))
+                            using (Html.BeginForm("AddResume", "Resume", FormMethod.Post))
                             {
                                 <input type="submit" value="Добавить вакансию" class="bot"/>
                                 @Html.DropDownList("idres", new SelectList(ViewBag.sel, "ResumeId", "ResumeName"), "Resume")
@@ -580,12 +580,12 @@ else if (ViewBag.s.Equals("") == false && ViewBag.c.Equals("") == false) //ес�
                                     }
                                     if(s==0)
                                     {
-                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary})
+                                        @Html.ActionLink("В закладки", "AddVacancyMark", new {controller="Vacancy",id = item.VacancyId, searchString = ViewBag.s, searchCity = ViewBag.c})
                                     }
                                     else
                                     {
                                          
-                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c, salary = ViewBag.salary} ,  new { @style = "color: brown;" })
+                                        @Html.ActionLink("В закладках", "DeleteVacancyMark", new {controller="Vacancy",id = item.VacancyId , st = 1, searchString = ViewBag.s, searchCity = ViewBag.c} ,  new { @style = "color: brown;" })
                                     }
                                     
                                 }

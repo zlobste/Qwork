@@ -23,7 +23,7 @@ namespace Everyday.Models
         [Required]
         [Display(Name = "ФИО")]
         public string UserName { get; set; }
-//
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]

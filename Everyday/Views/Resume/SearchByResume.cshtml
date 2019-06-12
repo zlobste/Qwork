@@ -62,7 +62,9 @@
                 <th class="thgreen">
                     Фото
                 </th>
-
+                <th class="thgreen">
+                    
+                </th>
             </tr>
         </tr>
         
@@ -114,6 +116,34 @@
                         </td>
     
                         <td>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <p style="margin-left: 22px;">
+                                @{
+                                    int s = 0;
+                                    foreach (string a in ViewBag.m.Split(' '))
+                                    {
+                                        if (a == Convert.ToString(item.ResumeId))
+                                        {
+                                            s += 1;
+                                            break;
+                                        }
+
+                                    }
+                                    if (s == 0)
+                                    {
+                                        @Html.ActionLink("Добавить", "AddResumeMark", new {id = item.ResumeId, searchString = ViewBag.s, searchCity = ViewBag.c})
+                                    }
+                                    else
+                                    {
+
+                                        @Html.ActionLink("Удалить", "DeleteResumeMark", new {id = item.ResumeId, st = 1, searchString = ViewBag.s, searchCity = ViewBag.c}, new {@style = "color: brown;"})
+                                    }
+
+                                }
+                            </p>
+                        }
+                        </td>
 
                     </tr>
 

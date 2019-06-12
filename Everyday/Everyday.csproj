@@ -225,7 +225,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResumeController.cs" />
+    <Compile Include="Controllers\VacancyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -271,9 +274,20 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Home\SearchByResume.cshtml" />
-    <Content Include="Views\Home\SeeCompany.cshtml" />
-    <Content Include="Views\Home\VacancyMarks.cshtml" />
+    <Content Include="Views\Company\CreateCompany.cshtml" />
+    <Content Include="Views\Company\EditCompany.cshtml" />
+    <Content Include="Views\Company\MyCompanies.cshtml" />
+    <Content Include="Views\Company\SeeCompany.cshtml" />
+    <Content Include="Views\Resume\CreateResume.cshtml" />
+    <Content Include="Views\Resume\EditResume.cshtml" />
+    <Content Include="Views\Resume\MyResumes.cshtml" />
+    <Content Include="Views\Resume\ResumeMarks.cshtml" />
+    <Content Include="Views\Resume\SearchByResume.cshtml" />
+    <Content Include="Views\Vacancy\Create.cshtml" />
+    <Content Include="Views\Vacancy\Details.cshtml" />
+    <Content Include="Views\Vacancy\Edit.cshtml" />
+    <Content Include="Views\Vacancy\VacancyDetails.cshtml" />
+    <Content Include="Views\Vacancy\VacancyMarks.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -286,18 +300,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Create.cshtml" />
-    <Content Include="Views\Home\Edit.cshtml" />
-    <Content Include="Views\Home\CreateCompany.cshtml" />
-    <Content Include="Views\Home\EditCompany.cshtml" />
-    <Content Include="Views\Home\MyCompanies.cshtml" />
-    <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Home\Cabinet.cshtml" />
-    <Content Include="Views\Home\CreateResume.cshtml" />
-    <Content Include="Views\Home\MyResumes.cshtml" />
-    <Content Include="Views\Home\EditResume.cshtml" />
     <Content Include="red-leaf.jpg" />
     <Content Include="js\jquery.min.js" />
     <Content Include="js\jquery.jcrop.preview.js" />
@@ -313,7 +318,6 @@
     <Content Include="content\jquery.Jcrop.min.css" />
     <Content Include="content\jquery.Jcrop.css" />
     <Content Include="content\images\Jcrop.gif" />
-    <Content Include="Views\Home\VacancyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

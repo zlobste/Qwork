@@ -13,15 +13,23 @@
 </h3>
 
 
-@Html.ActionLink("Мои компании", "MyCompanies")<br>
-@Html.ActionLink("Мои резюме", "MyResumes")<br>
+@Html.ActionLink("Мои компании", "MyCompanies" , "Company")<br>
+@Html.ActionLink("Мои резюме", "MyResumes" , "Resume")<br>
 @if (ViewBag.us == "" || ViewBag.us == " " || ViewBag.us == null)
+ {
+     <a style="color: brown; text-decoration: none;">Закладки вакансий</a><br>
+ }
+ else
+ {
+     @Html.ActionLink("Закладки вакансий", "VacancyMarks" , "Vacancy")<br>
+ }
+@if (ViewBag.rs == "" || ViewBag.rs == " " || ViewBag.rs == null)
 {
-    <a style="color: brown; text-decoration: none;">Закладки вакансий</a><br>
+    <a style="color: brown; text-decoration: none;">Закладки резюме</a><br>
 }
 else
 {
-    @Html.ActionLink("Закладки вакансий", "VacancyMarks")<br>
+    @Html.ActionLink("Закладки резюме", "ResumeMarks" , "Resume")<br>
 }
 @Html.ActionLink("Выход", "Logoff", "Account")
 

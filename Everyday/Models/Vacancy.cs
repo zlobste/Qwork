@@ -63,10 +63,10 @@ namespace Everyday.Models
         public string City { get; set; }
         
         
-        [Column("Resume")]
-        public string Resume { get; set; }
+          [Column("Resume")]
+          public string Resume { get; set; }
 
-        public  Company Company { get; set; } //навигационным свойством - при получении данных об игроке оно будет автоматически получать данные из БД.
+          public  Company Company { get; set; } //навигационным свойством - при получении данных об игроке оно будет автоматически получать данные из БД.
 
     }
 }

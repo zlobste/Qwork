@@ -65,7 +65,7 @@
         </td>
         <td>
 
-            @using (Html.BeginForm("DeleteThisResume", "Home", FormMethod.Post))
+            @using (Html.BeginForm("DeleteThisResume", "Resume", FormMethod.Post))
             {
                 <input id="prodId" name="id" type="hidden" value="@z.ResumeId">
                 <input id="prodId" name="idvac" type="hidden" value="@ViewBag.er">

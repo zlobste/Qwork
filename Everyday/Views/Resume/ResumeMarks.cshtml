@@ -1,0 +1,94 @@
+@model IEnumerable<Everyday.Models.Resume>
+
+@{
+    ViewBag.Title = "title";
+   
+}
+<link href="/Content/common.css" rel="stylesheet">
+<link href="/Content/forlist.css" rel="stylesheet">
+<link href="/Content/forresume.css" rel="stylesheet">
+
+<div style="margin-left: -100px;">
+<h2>Закладки резюме</h2>
+
+<table class="table">
+
+    <tr>
+        <tr>
+            <th class="thgreen">
+                Название резюме
+            </th>
+            <th class="thgreen">
+                ФИО
+            </th>
+            <th class="thgreen">
+                Возраст
+            </th>
+            <th class="thgreen">
+                Почта
+            </th>
+            <th class="thgreen">
+                Мобильный
+            </th>
+            <th class="thgreen">
+                город
+            </th>
+            <th class="thgreen" >
+                О себе
+            </th>
+            <th class="thgreen">
+                Фото
+            </th>
+            <th class="thgreen">
+                    
+            </th>
+        </tr>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+
+        <tr>
+            <td class="bott">
+                @Html.DisplayFor(modelItem => item.ResumeName)
+            </td>
+            <td class="bott">
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td class="bott">
+                @Html.DisplayFor(modelItem => item.UserAge)
+            </td>
+            <td class="bott">
+                @Html.DisplayFor(modelItem => item.UserEmail)
+            </td>
+            <td class="bott">
+                @Html.DisplayFor(modelItem => item.MobileNumber)
+            </td>
+            <td class="bott">
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td class="bott">
+                <div style="overflow-y: scroll; width: 350px; height: 230px;">
+                    @Html.DisplayFor(modelItem => item.About)
+                </div>
+            </td>
+            <td>
+                <div style="position: relative; overflow: hidden; width: 250px; height: 240px;">
+                    <img src="@String.Format(" data:image/jpg;base64,{0}", Convert.ToBase64String(item.Photo))" style="position: absolute; transform: translate(10%, 5%); width: 250px; height: 250px; object-fit: cover;"/>
+                </div>
+
+
+            </td>
+
+            <td>
+                <p style="margin-left: 22px; padding-top: 10px">
+
+                    @Html.ActionLink("Удалить", "DeleteResumeMark", new {id = item.ResumeId , st= 2 })
+                </p>
+            </td>
+
+        </tr>
+    }
+</table>
+</div>
